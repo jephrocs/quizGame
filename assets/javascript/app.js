@@ -31,7 +31,7 @@ var game = {
         $("#begin").remove();
 
         for (var i = 0; i < questions.length; i++) {
-            div.append("<h2>" + questions[i].question + "</h2>");
+            div.append("<h3>" + questions[i].question + "</h3>");
             for (var j = 0; j < questions[i].response.length; j++) {
                 div.append("<input type='radio' name='question-" + i +
                     "' value='" + questions[i].response[j] + "''>" + questions[i].response[j]);
@@ -39,7 +39,8 @@ var game = {
         }
 
         div.append("<button id='finished'>Finish</button>");
-        div.append("<button id='answers'>answers</button>");
+        div.append("<button id='answers'>Answers</button>");
+        div.append("<button class=' btn-sucess'type='submit' id='time'>More Time</button>");
     },
     // answers: function () {
     //     div.append("<h2>answers</h2>");
@@ -60,19 +61,27 @@ var game = {
         clearInterval(timer); $("#div2 h2").remove(); div.html("<h2>All finished!</h2>");
         div.append("<h3>you got  " + this.right + " correct</h3>");
         div.append("<h3>you got " + this.wrong + " wrong</h3>");
-        if(this.right === 5){
-            div.append("<h3>Perfect! You got them all correct.</h3>");
-        }else if(this.wrong === 5){
-            div.append("<h3>How did you get them all wrong ? you don't know 2+2 ?</h3>");
+        if (this.right === 5) {
+            div.append('<h3 class="text-success" >Perfect! You got them all correct.</h3>');
+        } else if (this.wrong === 5) {
+            div.append("<h3 class='text-danger'>How did you get them all wrong ? you don't know 2+2 ?</h3>");
         }
     }
 };
 $(document).on("click", "#answers", function () {
     console.log('hello');
     for (var i = 0; i < questions.length; i++) {
-        div.append("<h2>" + questions[i].question + " = " + questions[i].answer + "</h2>");
- 
+        div.append("<h2 class = 'text-info'>" + questions[i].question + "</h2>"+ " = " + "<h2 class = 'text-warning'>" + questions[i].answer + "</h2>");
+
     }
+});
+
+$(document).on("click", "#time", function () {
+    console.log('time button');
+    game.timeLeft++
+
+
+
 });
 
 $(document).on("click", "#finished", function () {
